@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarjeta de sellos digital para tu local</title>
+  <meta name="description" content="Tarjeta de sellos en Google Wallet para cafeterías y locales. Sin app para tus clientes.">
+  <style>
+    :root { --accent: #E85D24; --accent-dark: #993C1D; --ink: #1f1f1d; --muted: #5f5e5a; --bg: #fbfaf7; --card: #ffffff; --border: #e4e2da; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+    header, section { padding: 1.5rem 1.25rem; max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .5rem; }
+    h2 { font-size: 1.25rem; margin: 0 0 .75rem; }
+    p { margin: 0 0 1rem; color: var(--muted); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+    label { display: block; font-size: .9rem; margin-bottom: .25rem; }
+    input { width: 100%; padding: .7rem .8rem; border: 1px solid var(--border); border-radius: 8px; font: inherit; margin-bottom: .9rem; }
+    button { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: .8rem 1.1rem; font: inherit; font-weight: 500; cursor: pointer; width: 100%; }
+    button:hover { background: var(--accent-dark); }
+    .msg { margin-top: .75rem; font-size: .95rem; }
+    .error { color: #A32D2D; }
+    .ok { color: #3B6D11; }
+    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tus clientes vuelven cuando ven su progreso.</h1>
+    <p>Una tarjeta de sellos que vive en el Google Wallet de cada cliente. Sin app, sin tarjetas de papel.</p>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>Registrate en el programa</h2>
+      <form id="form-registro" novalidate>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" autocomplete="given-name" required>
+
+        <label for="whatsapp">WhatsApp</label>
+        <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="+54 9 351 ..." required>
+
+        <button type="submit">Guardar mi tarjeta</button>
+        <div id="msg" class="msg" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>Hecho en Córdoba</footer>
+
+  <script>
+    const form = document.getElementById('form-registro');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.className = 'msg';
+      msg.textContent = '';
+
+      const nombre = form.nombre.value.trim();
+      const whatsapp = form.whatsapp.value.trim();
+
+      if (!nombre || !whatsapp) {
+        msg.className = 'msg error';
+        msg.textContent = 'Completá nombre y WhatsApp.';
+        return;
+      }
+
+      // TODO paso 4: reemplazar por POST /registro al backend
+      msg.className = 'msg ok';
+      msg.textContent = 'Listo. Pronto te enviamos el enlace a tu tarjeta.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

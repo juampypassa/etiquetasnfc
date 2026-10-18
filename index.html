@@ -66,10 +66,32 @@
         return;
       }
 
-      // TODO paso 4: reemplazar por POST /registro al backend
-      msg.className = 'msg ok';
-      msg.textContent = 'Listo. Pronto te enviamos el enlace a tu tarjeta.';
-      form.reset();
+      const boton = form.querySelector('button');
+      boton.disabled = true;
+
+      try {
+        const res = await fetch('/api/registro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ local: 'cafe-rojo', nombre, whatsapp }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          msg.className = 'msg error';
+          msg.textContent = data.error || 'Algo salió mal. Probá de nuevo.';
+          return;
+        }
+
+        msg.className = 'msg ok';
+        msg.textContent = '¡Listo! Ahora acercá tu celular a la etiqueta del mostrador para sumar tu primer sello.';
+        form.reset();
+      } catch (err) {
+        msg.className = 'msg error';
+        msg.textContent = 'Sin conexión. Probá de nuevo.';
+      } finally {
+        boton.disabled = false;
+      }
     });
   </script>
 </body>

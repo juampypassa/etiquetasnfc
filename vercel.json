@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/s/:local", "destination": "/api/s/:local" },
+    { "source": "/c/:local", "destination": "/api/c/:local" }
+  ]
+}

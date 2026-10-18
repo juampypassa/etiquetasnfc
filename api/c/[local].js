@@ -36,8 +36,10 @@ module.exports = async (req, res) => {
       body: { cliente_id: cliente.id, etiqueta: 'canje', cantidad: -requeridos },
     });
 
+        const quedan = total - requeridos;
+    const txt = quedan === 1 ? '1 sello' : `${quedan} sellos`;
     return page(res, 200, `¡${loc.premio_texto}!`,
-      `Mostrá esta pantalla en caja. Te quedan ${total - requeridos} sellos.`);
+      `Mostrá esta pantalla en caja. Te quedan ${txt}.`);
   } catch (e) {
     console.error(e);
     return page(res, 500, 'Algo salió mal', 'Probá de nuevo en un momento.');

@@ -1,7 +1,20 @@
 {
   "rewrites": [
-    { "source": "/s/:local", "destination": "/api/s/:local" },
-    { "source": "/c/:local", "destination": "/api/c/:local" },
-    { "source": "/e/:codigo", "destination": "/api/e/:codigo" }
+    {
+      "source": "/s/:local",
+      "destination": "/api/s/:local"
+    },
+    {
+      "source": "/c/:local",
+      "destination": "/api/c/:local"
+    },
+    {
+      "source": "/e/:codigo",
+      "destination": "/api/e/:codigo"
+    },
+    {
+      "source": "/v/:codigo",
+      "destination": "/api/evento/validar?codigo=:codigo"
+    }
   ]
 }

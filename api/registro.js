@@ -1,5 +1,6 @@
 const { sb } = require('../lib/supabase');
 const { getLocal, saldo } = require('../lib/util');
+const { sincronizar, enlaceGuardar } = require('../lib/wallet');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
@@ -32,7 +33,26 @@ module.exports = async (req, res) => {
     );
 
     const total = await saldo(cliente.id);
-    return res.status(200).json({ ok: true, sellos: total, requeridos: loc.sellos_requeridos });
+
+    // Si Wallet falla, el registro igual se guarda y se sigue con sellos
+    let saveUrl = null;
+    try {
+      saveUrl = enlaceGuardar(cliente, total);
+    } catch (e) {
+      console.error('Wallet enlace:', e.message);
+    }
+    try {
+      await sincronizar(cliente, total);
+    } catch (e) {
+      console.error('Wallet sync:', e.message);
+    }
+
+    return res.status(200).json({
+      ok: true,
+      sellos: total,
+      requeridos: loc.sellos_requeridos,
+      saveUrl,
+    });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: 'No pudimos guardar tu registro. Probá de nuevo.' });

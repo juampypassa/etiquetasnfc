@@ -1,5 +1,6 @@
 const { sb } = require('../../lib/supabase');
 const { cookie, page, getLocal, getCliente, saldo } = require('../../lib/util');
+const { sincronizar } = require('../../lib/wallet');
 
 const VENTANA_MS = 2 * 60 * 60 * 1000; // un sello cada 2 horas
 
@@ -33,6 +34,7 @@ module.exports = async (req, res) => {
     });
 
     const total = await saldo(cliente.id);
+    try { await sincronizar(cliente, total); } catch (e) { console.error('Wallet:', e.message); }
     const extra = total >= loc.sellos_requeridos
       ? ' ¡Completaste la tarjeta! Tocá la etiqueta de canje.'
       : '';

@@ -1,5 +1,6 @@
 const { sb } = require('../../lib/supabase');
 const { cookie, page, getLocal, getCliente, saldo } = require('../../lib/util');
+const { sincronizar } = require('../../lib/wallet');
 
 module.exports = async (req, res) => {
   const slug = String(req.query.local || '');
@@ -35,6 +36,8 @@ module.exports = async (req, res) => {
       prefer: 'return=minimal',
       body: { cliente_id: cliente.id, etiqueta: 'canje', cantidad: -requeridos },
     });
+
+    try { await sincronizar(cliente, total - requeridos); } catch (e) { console.error('Wallet:', e.message); }
 
     return page(res, 200, `¡${loc.premio_texto}!`,
       `Mostrá esta pantalla en caja. Te quedan ${total - requeridos} sellos.`);

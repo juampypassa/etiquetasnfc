@@ -85,6 +85,13 @@
 
         msg.className = 'msg ok';
         msg.textContent = '¡Listo! Ahora acercá tu celular a la etiqueta del mostrador para sumar tu primer sello.';
+        if (data.saveUrl) {
+          const a = document.createElement('a');
+          a.href = data.saveUrl;
+          a.textContent = 'Guardar en Google Wallet';
+          a.style.cssText = 'display:inline-block;margin-top:.75rem;background:#E85D24;color:#fff;padding:.8rem 1.1rem;border-radius:8px;text-decoration:none;font-weight:500';
+          msg.appendChild(a);
+        }
         form.reset();
       } catch (err) {
         msg.className = 'msg error';

@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tarjeta de sellos digital para tu local</title>
+  <meta name="theme-color" content="#E85D24">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="description" content="Tarjeta de sellos en Google Wallet para cafeterías y locales. Sin app para tus clientes.">
   <style>
     :root { --accent: #E85D24; --accent-dark: #993C1D; --ink: #1f1f1d; --muted: #5f5e5a; --bg: #fbfaf7; --card: #ffffff; --border: #e4e2da; }
@@ -92,6 +95,11 @@
           a.style.cssText = 'display:inline-block;margin-top:.75rem;background:#E85D24;color:#fff;padding:.8rem 1.1rem;border-radius:8px;text-decoration:none;font-weight:500';
           msg.appendChild(a);
         }
+        const mi = document.createElement('a');
+        mi.href = '/mi';
+        mi.textContent = 'Ver mi tarjeta y activar avisos';
+        mi.style.cssText = 'display:inline-block;margin-top:.75rem;margin-left:.5rem;color:#993C1D;font-weight:500';
+        msg.appendChild(mi);
         form.reset();
       } catch (err) {
         msg.className = 'msg error';

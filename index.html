@@ -3,38 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tarjeta de sellos digital para tu local</title>
-  <meta name="theme-color" content="#E85D24">
+  <title>Tierra de Sol · Tarjeta de sellos</title>
+  <meta name="description" content="Tarjeta de sellos de Tierra de Sol. Sumá sellos con cada compra y canjealos por un premio.">
+  <meta name="theme-color" content="#16361E">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/icon-192.png">
-  <meta name="description" content="Tarjeta de sellos en Google Wallet para cafeterías y locales. Sin app para tus clientes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --accent: #E85D24; --accent-dark: #993C1D; --ink: #1f1f1d; --muted: #5f5e5a; --bg: #fbfaf7; --card: #ffffff; --border: #e4e2da; }
+    :root {
+      --dark: #16361E;
+      --green: #1E4426;
+      --cream: #FDDCAC;
+      --paper: #FFF3DC;
+      --accent: #EF461D;
+      --accent-dark: #B8320F;
+      --leaf: #A9D18E;
+      --brown: #7A4A1E;
+      --ink: #16361E;
+      --muted: #4d5b43;
+    }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
-    header, section { padding: 1.5rem 1.25rem; max-width: 720px; margin: 0 auto; }
-    h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .5rem; }
-    h2 { font-size: 1.25rem; margin: 0 0 .75rem; }
-    p { margin: 0 0 1rem; color: var(--muted); }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-    label { display: block; font-size: .9rem; margin-bottom: .25rem; }
-    input { width: 100%; padding: .7rem .8rem; border: 1px solid var(--border); border-radius: 8px; font: inherit; margin-bottom: .9rem; }
-    button { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: .8rem 1.1rem; font: inherit; font-weight: 500; cursor: pointer; width: 100%; }
-    button:hover { background: var(--accent-dark); }
-    .msg { margin-top: .75rem; font-size: .95rem; }
-    .error { color: #A32D2D; }
-    .ok { color: #3B6D11; }
-    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem 1rem; }
+    body { margin: 0; font-family: "Barlow", system-ui, sans-serif; color: var(--ink); background: var(--cream); line-height: 1.55; min-height: 100vh; }
+    .cabecera { background: var(--dark); color: var(--cream); text-align: center; padding: 2rem 1.25rem 3.5rem; border-bottom: 6px solid var(--brown); }
+    .cabecera img { width: 140px; height: auto; display: block; margin: 0 auto .75rem; }
+    .cabecera h1 { font-family: "Titan One", system-ui, sans-serif; font-weight: 400; font-size: 1.8rem; line-height: 1.15; margin: 0 auto .6rem; max-width: 520px; color: var(--cream); }
+    .cabecera p { color: var(--leaf); margin: 0 auto; max-width: 460px; }
+    main { max-width: 520px; margin: -2.5rem auto 0; padding: 0 1.1rem 2rem; position: relative; }
+    .card { background: var(--paper); border: 3px solid var(--brown); border-radius: 18px; padding: 1.4rem 1.25rem; box-shadow: 0 6px 0 var(--brown); }
+    h2 { font-family: "Titan One", system-ui, sans-serif; font-weight: 400; font-size: 1.3rem; margin: 0 0 .9rem; color: var(--dark); }
+    label { display: block; font-size: .95rem; font-weight: 600; margin-bottom: .3rem; color: var(--dark); }
+    input { width: 100%; padding: .75rem .85rem; border: 2px solid var(--brown); border-radius: 10px; font: inherit; background: #fff; margin-bottom: 1rem; color: var(--ink); }
+    input:focus { outline: 3px solid var(--leaf); }
+    button { background: var(--accent); color: #fff; border: 0; border-bottom: 4px solid var(--accent-dark); border-radius: 12px; padding: .9rem 1.1rem; font: inherit; font-family: "Titan One", system-ui, sans-serif; font-size: 1.05rem; width: 100%; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: default; }
+    .msg { margin-top: .9rem; font-size: 1rem; }
+    .error { color: #A32D2D; font-weight: 600; }
+    .ok { color: var(--dark); font-weight: 600; }
+    .enlaces { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .9rem; }
+    .boton-secundario { display: inline-block; padding: .7rem 1rem; border-radius: 12px; text-decoration: none; font-weight: 600; font-family: "Titan One", system-ui, sans-serif; font-size: .95rem; }
+    .boton-secundario.primario { background: var(--dark); color: var(--cream); border-bottom: 4px solid #0b2112; }
+    .boton-secundario.wallet { background: var(--leaf); color: var(--dark); border-bottom: 4px solid #7fae62; }
+    footer { text-align: center; color: var(--dark); font-size: .9rem; padding: 1.5rem 1rem 2rem; }
+    footer strong { font-family: "Titan One", system-ui, sans-serif; font-weight: 400; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Tus clientes vuelven cuando ven su progreso.</h1>
-    <p>Una tarjeta de sellos que vive en el Google Wallet de cada cliente. Sin app, sin tarjetas de papel.</p>
+  <header class="cabecera">
+    <img src="/logo.png" alt="Tierra de Sol">
+    <h1>Cada compra te acerca a tu premio.</h1>
+    <p>Registrate, sumá sellos al comprar y canjealos cuando llegues a 10.</p>
   </header>
 
-  <section>
-    <div class="card">
+  <main>
+    <section class="card">
       <h2>Registrate en el programa</h2>
       <form id="form-registro" novalidate>
         <label for="nombre">Nombre</label>
@@ -46,10 +69,10 @@
         <button type="submit">Guardar mi tarjeta</button>
         <div id="msg" class="msg" role="status"></div>
       </form>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <footer>Hecho en Córdoba</footer>
+  <footer><strong>Tierra de Sol</strong> · Hecho en Córdoba</footer>
 
   <script>
     const form = document.getElementById('form-registro');
@@ -88,18 +111,24 @@
 
         msg.className = 'msg ok';
         msg.textContent = '¡Listo! Ahora acercá tu celular a la etiqueta del mostrador para sumar tu primer sello.';
+
+        const enlaces = document.createElement('div');
+        enlaces.className = 'enlaces';
+
+        const mi = document.createElement('a');
+        mi.href = '/mi';
+        mi.textContent = 'Ver mi tarjeta y activar avisos';
+        mi.className = 'boton-secundario primario';
+        enlaces.appendChild(mi);
+
         if (data.saveUrl) {
           const a = document.createElement('a');
           a.href = data.saveUrl;
           a.textContent = 'Guardar en Google Wallet';
-          a.style.cssText = 'display:inline-block;margin-top:.75rem;background:#E85D24;color:#fff;padding:.8rem 1.1rem;border-radius:8px;text-decoration:none;font-weight:500';
-          msg.appendChild(a);
+          a.className = 'boton-secundario wallet';
+          enlaces.appendChild(a);
         }
-        const mi = document.createElement('a');
-        mi.href = '/mi';
-        mi.textContent = 'Ver mi tarjeta y activar avisos';
-        mi.style.cssText = 'display:inline-block;margin-top:.75rem;margin-left:.5rem;color:#993C1D;font-weight:500';
-        msg.appendChild(mi);
+        msg.appendChild(enlaces);
         form.reset();
       } catch (err) {
         msg.className = 'msg error';

@@ -6,7 +6,7 @@ self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim(
 self.addEventListener('fetch', () => {});
 
 self.addEventListener('push', (event) => {
-  let data = { title: 'Café Rojo', body: 'Tenés novedades', url: '/mi' };
+  let data = { title: 'Tierra de Sol', body: 'Tenés novedades', url: '/mi' };
   try {
     data = { ...data, ...event.data.json() };
   } catch (e) {

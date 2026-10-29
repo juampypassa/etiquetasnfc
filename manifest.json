@@ -1,11 +1,11 @@
 {
-  "name": "Café Rojo · Tarjeta de sellos",
-  "short_name": "Café Rojo",
+  "name": "Tierra de Sol · Tarjeta de sellos",
+  "short_name": "Tierra de Sol",
   "start_url": "/mi",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#fbfaf7",
-  "theme_color": "#E85D24",
+  "background_color": "#FDDCAC",
+  "theme_color": "#16361E",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }

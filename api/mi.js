@@ -24,45 +24,52 @@ module.exports = async (req, res) => {
 <html lang="es"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#E85D24">
+<meta name="theme-color" content="#16361E">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icon-192.png">
-<title>Mi tarjeta · ${esc(loc.nombre || 'Café Rojo')}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Mi tarjeta · ${esc('Tierra de Sol')}</title>
 <style>
-:root{--accent:#E85D24;--accent-dark:#993C1D;--ink:#1f1f1d;--muted:#5f5e5a;--bg:#fbfaf7;--border:#e4e2da}
+:root{--dark:#16361E;--green:#1E4426;--cream:#FDDCAC;--paper:#FFF3DC;--accent:#EF461D;--accent-dark:#B8320F;--leaf:#A9D18E;--brown:#7A4A1E;--ink:#16361E;--muted:#4d5b43}
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;padding:1.25rem 1rem 2rem}
-.wrap{max-width:520px;margin:0 auto}
-h1{font-size:1.5rem;margin:.25rem 0 .25rem}
-p{color:var(--muted);margin:.25rem 0 1rem;line-height:1.5}
-.tarjeta{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-top:1rem}
-.progreso{font-size:1.05rem;margin:0 0 .75rem}
-.puntos{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;margin-bottom:.5rem}
-.punto{aspect-ratio:1;border-radius:50%;border:2px dashed var(--border);background:#f4f2ec}
+body{margin:0;font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--cream);min-height:100vh}
+.cabecera{background:var(--dark);color:var(--cream);text-align:center;padding:1.5rem 1rem 3rem;border-bottom:6px solid var(--brown)}
+.cabecera img{width:110px;height:auto;display:block;margin:0 auto .5rem}
+.cabecera h1{font-family:"Titan One",system-ui,sans-serif;font-weight:400;font-size:1.5rem;margin:0;color:var(--cream)}
+main{max-width:520px;margin:-2.2rem auto 0;padding:0 1.1rem 2rem;position:relative}
+.tarjeta{background:var(--paper);border:3px solid var(--brown);border-radius:18px;padding:1.3rem 1.15rem;box-shadow:0 6px 0 var(--brown)}
+.progreso{font-size:1.1rem;margin:0 0 .9rem;color:var(--dark)}
+.puntos{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;margin-bottom:.4rem}
+.punto{aspect-ratio:1;border-radius:50%;border:2px dashed var(--brown);background:#fff}
 .punto.lleno{background:var(--accent);border:2px solid var(--accent-dark)}
-button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:.9rem 1.1rem;font:inherit;font-weight:600;width:100%;cursor:pointer;margin-top:.75rem}
-button:disabled{background:#c9c7bf;cursor:default}
-.aviso{margin-top:.75rem;font-size:.95rem;color:var(--muted);min-height:1.2em}
-.ayuda{font-size:.9rem;color:var(--muted);margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1rem}
+button{background:var(--accent);color:#fff;border:0;border-bottom:4px solid var(--accent-dark);border-radius:12px;padding:.9rem 1.1rem;font-family:"Titan One",system-ui,sans-serif;font-size:1.05rem;width:100%;cursor:pointer;margin-top:.9rem}
+button:disabled{opacity:.55;cursor:default}
+.aviso{margin-top:.75rem;font-size:1rem;color:var(--dark);min-height:1.2em;font-weight:500}
+.ayuda{font-size:.95rem;color:var(--muted);margin-top:1.4rem;background:var(--dark);color:var(--cream);border-radius:14px;padding:1rem 1.1rem;line-height:1.6}
+.ayuda strong{color:var(--leaf);font-family:"Titan One",system-ui,sans-serif;font-weight:400}
 </style></head>
-<body><div class="wrap">
+<body>
+<header class="cabecera">
+  <img src="/logo.png" alt="Tierra de Sol">
   <h1>Hola, ${esc(cliente.nombre)}</h1>
-  <p>Tu tarjeta de sellos en ${esc(loc.nombre || 'Café Rojo')}.</p>
-
-  <div class="tarjeta">
+</header>
+<main>
+  <section class="tarjeta">
     <p class="progreso">Llevás <strong>${total}</strong> de ${requeridos} sellos.${total >= requeridos ? ' ¡Completaste la tarjeta! Tocá la etiqueta de canje.' : ' Tocá la etiqueta del mostrador para sumar.'}</p>
     <div class="puntos">${puntos}</div>
 
     <button id="notif" type="button">Activar avisos de promos</button>
     <div id="aviso" class="aviso" role="status"></div>
-  </div>
+  </section>
 
   <div class="ayuda">
     <strong>Para tener la tarjeta siempre a mano:</strong><br>
     Android (Chrome): menú ⋮ → "Instalar app" o "Agregar a inicio".<br>
     iPhone (Safari): botón Compartir → "Agregar a pantalla de inicio". Después abrila desde ese ícono.
   </div>
-</div>
+</main>
 
 <script>
 const VAPID = ${JSON.stringify(vapid)};

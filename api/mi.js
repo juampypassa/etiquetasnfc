@@ -48,6 +48,8 @@ button{background:var(--accent);color:#fff;border:0;border-bottom:4px solid var(
 button:disabled{opacity:.55;cursor:default}
 .aviso{margin-top:.75rem;font-size:1rem;color:var(--dark);min-height:1.2em;font-weight:500}
 .ayuda{font-size:.95rem;color:var(--muted);margin-top:1.4rem;background:var(--dark);color:var(--cream);border-radius:14px;padding:1rem 1.1rem;line-height:1.6}
+[hidden]{display:none !important}
+.instalar{margin:0 0 1rem;background:var(--dark);color:var(--cream);border-bottom:4px solid #0b2112;width:100%}
 .ayuda strong{color:var(--leaf);font-family:"Titan One",system-ui,sans-serif;font-weight:400}
 </style></head>
 <body>
@@ -56,6 +58,7 @@ button:disabled{opacity:.55;cursor:default}
   <h1>Hola, ${esc(cliente.nombre)}</h1>
 </header>
 <main>
+  <button id="instalar" class="instalar" type="button" hidden>Instalar Tierra de Sol</button>
   <section class="tarjeta">
     <p class="progreso">Llevás <strong>${total}</strong> de ${requeridos} sellos.${total >= requeridos ? ' ¡Completaste la tarjeta! Tocá la etiqueta de canje.' : ' Tocá la etiqueta del mostrador para sumar.'}</p>
     <div class="puntos">${puntos}</div>
@@ -78,6 +81,25 @@ const aviso = document.getElementById('aviso');
 const soporta = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 const esIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 const enApp = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+// Instalación directa: cuando Chrome permite instalar, mostramos nuestro propio botón
+let eventoInstalar = null;
+const botonInstalar = document.getElementById('instalar');
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  eventoInstalar = e;
+  botonInstalar.hidden = false;
+});
+botonInstalar.addEventListener('click', async function () {
+  if (!eventoInstalar) return;
+  eventoInstalar.prompt();
+  await eventoInstalar.userChoice;
+  eventoInstalar = null;
+  botonInstalar.hidden = true;
+});
+window.addEventListener('appinstalled', function () {
+  botonInstalar.hidden = true;
+});
 
 function bytesDeClave(b64) {
   const base = (b64 + '='.repeat((4 - b64.length % 4) % 4)).replace(/-/g, '+').replace(/_/g, '/');

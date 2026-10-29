@@ -49,16 +49,16 @@ button:disabled{opacity:.55;cursor:default}
 .aviso{margin-top:.75rem;font-size:1rem;color:var(--dark);min-height:1.2em;font-weight:500}
 .ayuda{font-size:.95rem;color:var(--muted);margin-top:1.4rem;background:var(--dark);color:var(--cream);border-radius:14px;padding:1rem 1.1rem;line-height:1.6}
 [hidden]{display:none !important}
-.instalar{margin:0 0 1rem;background:var(--dark);color:var(--cream);border-bottom:4px solid #0b2112;width:100%}
+.instalar{display:block;width:auto;margin:1rem auto 0;padding:.6rem 1.3rem;font-size:.95rem;background:var(--leaf);color:var(--dark);border-bottom:4px solid #7fae62;border-radius:999px}
 .ayuda strong{color:var(--leaf);font-family:"Titan One",system-ui,sans-serif;font-weight:400}
 </style></head>
 <body>
 <header class="cabecera">
   <img src="/logo.png" alt="Tierra de Sol">
   <h1>Hola, ${esc(cliente.nombre)}</h1>
+  <button id="instalar" class="instalar" type="button" hidden>Instalar Tierra de Sol</button>
 </header>
 <main>
-  <button id="instalar" class="instalar" type="button" hidden>Instalar Tierra de Sol</button>
   <section class="tarjeta">
     <p class="progreso">Llevás <strong>${total}</strong> de ${requeridos} sellos.${total >= requeridos ? ' ¡Completaste la tarjeta! Tocá la etiqueta de canje.' : ' Tocá la etiqueta del mostrador para sumar.'}</p>
     <div class="puntos">${puntos}</div>
